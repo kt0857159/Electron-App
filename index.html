@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Task List</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+        <style>
+            #saveBtn {
+                display: none;
+                margin: auto;
+            }
+        </style>
+
+    </head>
+    <body>
+        <nav>
+            <div class="nav-wrapper">
+                <a class="brand-logo center">Task List</a>
+            </div>
+        </nav>
+        <ul id="list"></ul>
+        <div class="container">
+            <button id="saveBtn" class="btn waves-effect waves-light" type="submit">Save File</button>
+        </div>
+        <script>
+            const electron = require('electron');
+            const {ipcRenderer} = electron;
+            const ul = document.querySelector('ul');
+            const button = document.getElementById('saveBtn');
+
+            ipcRenderer.on('item:add', function(e, item){
+                ul.className = 'collection';
+                const li = document.createElement('li');
+                li.className = 'collection-item';
+                const itemText = document.createTextNode(item);
+                li.appendChild(itemText);
+                ul.appendChild(li);
+                button.style.display = 'block';
+            });
+
+            ipcRenderer.on('item:clear', function(){
+                ul.innerHTML = '';
+                ul.className = '';
+                button.style.display = 'none';
+            });
+
+            ul.addEventListener('dblclick', removeItem);
+
+            function removeItem(e){
+                e.target.remove();
+                if(ul.children.length == 0){
+                    ul.className = '';
+                    button.style.display = 'none';
+                };
+            };
+        </script>
+        <script>
+            require('./renderer.js')
+        </script>
+
+    </body>
+</html>

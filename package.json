@@ -1,0 +1,23 @@
+{
+  "name": "electron-app",
+  "productName" : "Electron App",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kt0857159/Electron-App.git"
+  },
+  "author": "Kyle Turner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kt0857159/Electron-App/issues"
+  },
+  "homepage": "https://github.com/kt0857159/Electron-App#readme",
+  "devDependencies": {
+    "electron": "^1.7.9"
+  }
+}
